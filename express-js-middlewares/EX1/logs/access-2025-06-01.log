@@ -1,0 +1,12 @@
+::1 - - [2025-06-01 19:36:12] "GET / HTTP/1.1" 200 - "-" "axios/1.9.0" 1ms | Body: {}
+::1 - - [2025-06-01 19:36:13] "GET / HTTP/1.1" 200 - "-" "axios/1.9.0" 0ms | Body: {}
+::1 - - [2025-06-01 19:36:13] "GET /users HTTP/1.1" 200 - "-" "axios/1.9.0" 0ms | Body: {}
+::1 - - [2025-06-01 19:36:13] "POST /users HTTP/1.1" 201 - "-" "axios/1.9.0" 0ms | Body: {"name":"Test User","email":"test@example.com"}
+::1 - - [2025-06-01 19:36:13] "GET /products/123 HTTP/1.1" 200 - "-" "axios/1.9.0" 1ms | Body: {}
+::1 - - [2025-06-01 19:36:13] "GET /slow HTTP/1.1" 200 - "-" "axios/1.9.0" 2002ms | Body: {}
+::1 - - [2025-06-01 19:36:15] "POST /users HTTP/1.1" 400 - "-" "axios/1.9.0" 0ms | Body: {}
+::1 - - [2025-06-01 19:36:15] "GET /route-inexistante HTTP/1.1" 404 - "-" "axios/1.9.0" 0ms | Body: {}
+::1 - - [2025-06-01 19:36:15] "GET /error HTTP/1.1" 500 - "-" "axios/1.9.0" 1ms | Body: {}
+::1 - - [2025-06-01 19:36:15] "GET /products/abc HTTP/1.1" 400 - "-" "axios/1.9.0" 0ms | Body: {}
+::1 - - [2025-06-01 19:36:16] "GET /logs/analysis HTTP/1.1" 200 - "-" "axios/1.9.0" 1ms | Body: {}
+::1 - - [2025-06-01 19:36:16] "GET /logs/raw HTTP/1.1" 200 - "-" "axios/1.9.0" 1ms | Body: {}

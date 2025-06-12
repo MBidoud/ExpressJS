@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .header {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .header h1 {
+        color: #2d3436;
+        margin-bottom: 10px;
+        font-size: 2.5em;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .stat-card {
+        background: rgba(116, 185, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        border: 2px solid rgba(116, 185, 255, 0.3);
+      }
+
+      .stat-number {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #0984e3;
+      }
+
+      .upload-section {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 40px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .upload-area {
+        border: 3px dashed #74b9ff;
+        border-radius: 15px;
+        padding: 40px;
+        text-align: center;
+        background: rgba(116, 185, 255, 0.05);
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+      }
+
+      .upload-area.dragover {
+        border-color: #0984e3;
+        background: rgba(116, 185, 255, 0.1);
+        transform: scale(1.02);
+      }
+
+      .upload-icon {
+        font-size: 4em;
+        color: #74b9ff;
+        margin-bottom: 20px;
+      }
+
+      .upload-text {
+        font-size: 1.2em;
+        color: #636e72;
+        margin-bottom: 20px;
+      }
+
+      .file-input {
+        display: none;
+      }
+
+      .upload-btn {
+        background: linear-gradient(45deg, #74b9ff, #0984e3);
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .upload-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(116, 185, 255, 0.3);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #2d3436;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-control:focus {
+        border-color: #74b9ff;
+        outline: none;
+      }
+
+      .file-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .preview-item {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        border: 2px solid #e9ecef;
+      }
+
+      .preview-img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .preview-name {
+        font-size: 0.9em;
+        color: #636e72;
+        word-break: break-word;
+      }
+
+      .preview-size {
+        font-size: 0.8em;
+        color: #74b9ff;
+        font-weight: bold;
+      }
+
+      .submit-btn {
+        background: linear-gradient(45deg, #00b894, #00a085);
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 184, 148, 0.3);
+      }
+
+      .submit-btn:disabled {
+        background: #b2bec3;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .recent-section {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .recent-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .recent-item {
+        background: #f8f9fa;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        border: 2px solid #e9ecef;
+      }
+
+      .recent-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .recent-img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+
+      .recent-info {
+        padding: 15px;
+      }
+
+      .recent-name {
+        font-weight: bold;
+        color: #2d3436;
+        margin-bottom: 5px;
+        word-break: break-word;
+      }
+
+      .recent-date {
+        font-size: 0.9em;
+        color: #636e72;
+      }
+
+      .nav-links {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .nav-link {
+        display: inline-block;
+        padding: 12px 25px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #2d3436;
+        text-decoration: none;
+        border-radius: 25px;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+        font-weight: bold;
+      }
+
+      .nav-link:hover {
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .progress {
+        display: none;
+        width: 100%;
+        height: 6px;
+        background: #e9ecef;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 20px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(45deg, #74b9ff, #0984e3);
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      @media (max-width: 768px) {
+        .stats {
+          grid-template-columns: 1fr;
+        }
+
+        .upload-area {
+          padding: 20px;
+        }
+
+        .recent-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Navigation -->
+      <div class="nav-links">
+        <a href="/" class="nav-link">📤 Upload</a>
+        <a href="/gallery" class="nav-link">🖼️ Galerie</a>
+      </div>
+
+      <!-- Header -->
+      <div class="header">
+        <h1>🖼️ Galerie d'Images</h1>
+        <p>
+          Uploadez vos images (JPEG, PNG, GIF) - Maximum {maxSize} par fichier
+        </p>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-number">{totalImages}</div>
+            <div>Images totales</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{maxSize}</div>
+            <div>Taille maximum</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{allowedTypes}</div>
+            <div>Formats supportés</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Upload -->
+      <div class="upload-section">
+        <h2>📤 Uploader des images</h2>
+
+        <form
+          id="uploadForm"
+          action="/upload"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">☁️</div>
+            <div class="upload-text">
+              Glissez-déposez vos images ici ou cliquez pour sélectionner
+            </div>
+            <button
+              type="button"
+              class="upload-btn"
+              onclick="document.getElementById('fileInput').click()"
+            >
+              📁 Choisir des fichiers
+            </button>
+            <input
+              type="file"
+              id="fileInput"
+              name="images"
+              class="file-input"
+              multiple
+              accept="image/jpeg,image/png,image/gif"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description (optionnelle)</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              class="form-control"
+              placeholder="Décrivez vos images..."
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="tags">Tags (séparés par des virgules)</label>
+            <input
+              type="text"
+              id="tags"
+              name="tags"
+              class="form-control"
+              placeholder="nature, paysage, vacances..."
+            />
+          </div>
+
+          <div id="filePreview" class="file-preview"></div>
+
+          <div class="progress" id="uploadProgress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn" disabled>
+            🚀 Uploader les images
+          </button>
+        </form>
+      </div>
+
+      <!-- Images récentes -->
+      <div class="recent-section">
+        <h2>📸 Images récentes</h2>
+        <div class="recent-grid">
+          <!-- Cette section sera remplie dynamiquement -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const uploadArea = document.getElementById("uploadArea");
+      const fileInput = document.getElementById("fileInput");
+      const filePreview = document.getElementById("filePreview");
+      const submitBtn = document.getElementById("submitBtn");
+      const uploadForm = document.getElementById("uploadForm");
+      const uploadProgress = document.getElementById("uploadProgress");
+      const progressBar = document.getElementById("progressBar");
+
+      let selectedFiles = [];
+
+      // Drag & Drop
+      uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.classList.add("dragover");
+      });
+
+      uploadArea.addEventListener("dragleave", () => {
+        uploadArea.classList.remove("dragover");
+      });
+
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("dragover");
+        const files = Array.from(e.dataTransfer.files);
+        handleFiles(files);
+      });
+
+      // Sélection de fichiers
+      fileInput.addEventListener("change", (e) => {
+        const files = Array.from(e.target.files);
+        handleFiles(files);
+      });
+
+      function handleFiles(files) {
+        // Filtrer les images
+        const imageFiles = files.filter(
+          (file) =>
+            file.type.startsWith("image/") &&
+            ["image/jpeg", "image/png", "image/gif"].includes(file.type)
+        );
+
+        if (imageFiles.length !== files.length) {
+          alert(
+            "Certains fichiers ont été ignorés (seuls JPEG, PNG et GIF sont acceptés)"
+          );
+        }
+
+        // Vérifier la taille
+        const validFiles = imageFiles.filter(
+          (file) => file.size <= 5 * 1024 * 1024
+        );
+
+        if (validFiles.length !== imageFiles.length) {
+          alert("Certains fichiers sont trop volumineux (maximum 5MB)");
+        }
+
+        // Limiter à 5 fichiers
+        if (validFiles.length > 5) {
+          alert("Maximum 5 fichiers autorisés");
+          validFiles = validFiles.slice(0, 5);
+        }
+
+        selectedFiles = validFiles;
+        updatePreview();
+        updateSubmitButton();
+      }
+
+      function updatePreview() {
+        filePreview.innerHTML = "";
+
+        selectedFiles.forEach((file, index) => {
+          const previewItem = document.createElement("div");
+          previewItem.className = "preview-item";
+
+          const img = document.createElement("img");
+          img.className = "preview-img";
+          img.src = URL.createObjectURL(file);
+
+          const name = document.createElement("div");
+          name.className = "preview-name";
+          name.textContent = file.name;
+
+          const size = document.createElement("div");
+          size.className = "preview-size";
+          size.textContent = formatFileSize(file.size);
+
+          previewItem.appendChild(img);
+          previewItem.appendChild(name);
+          previewItem.appendChild(size);
+
+          filePreview.appendChild(previewItem);
+        });
+      }
+
+      function updateSubmitButton() {
+        submitBtn.disabled = selectedFiles.length === 0;
+      }
+
+      function formatFileSize(bytes) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+      }
+
+      // Simulation de progression d'upload
+      uploadForm.addEventListener("submit", (e) => {
+        if (selectedFiles.length === 0) {
+          e.preventDefault();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "📤 Upload en cours...";
+        uploadProgress.style.display = "block";
+
+        // Simulation de progression
+        let progress = 0;
+        const interval = setInterval(() => {
+          progress += Math.random() * 30;
+          if (progress > 90) progress = 90;
+          progressBar.style.width = progress + "%";
+        }, 200);
+
+        // Le formulaire sera soumis normalement
+      });
+    </script>
+  </body>
+</html>

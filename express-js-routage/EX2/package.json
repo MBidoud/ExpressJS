@@ -1,0 +1,26 @@
+{
+  "name": "blog-api-routes",
+  "version": "1.0.0",
+  "description": "API de blog avec routes paramétrées - Express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "express",
+    "blog",
+    "api",
+    "routes",
+    "parametres"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

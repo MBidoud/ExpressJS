@@ -1,0 +1,424 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start EX1 - Form Submission",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX1"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Server starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      }
+    },
+    {
+      "label": "Start EX2 - File Upload",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX2"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Server starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      }
+    },
+    {
+      "label": "Start EX3 - Multi-format API",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX3"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Server starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      }
+    },
+    {
+      "label": "Start All Exercises",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "Start EX1 - Form Submission",
+        "Start EX2 - File Upload",
+        "Start EX3 - Multi-format API"
+      ]
+    },
+    {
+      "label": "Test EX1",
+      "type": "shell",
+      "command": "npm",
+      "args": ["test"],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX1"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
+    {
+      "label": "Test EX2",
+      "type": "shell",
+      "command": "npm",
+      "args": ["test"],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX2"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
+    {
+      "label": "Test EX3",
+      "type": "shell",
+      "command": "npm",
+      "args": ["test"],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX3"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
+    {
+      "label": "Test All Exercises",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Test EX1", "Test EX2", "Test EX3"]
+    },
+    {
+      "label": "Install Dependencies - EX1",
+      "type": "shell",
+      "command": "npm",
+      "args": ["install"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX1"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Install Dependencies - EX2",
+      "type": "shell",
+      "command": "npm",
+      "args": ["install"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX2"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Install Dependencies - EX3",
+      "type": "shell",
+      "command": "npm",
+      "args": ["install"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX3"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Install All Dependencies",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Install Dependencies - EX1",
+        "Install Dependencies - EX2",
+        "Install Dependencies - EX3"
+      ]
+    },
+    {
+      "label": "Clean Install - EX1",
+      "type": "shell",
+      "command": "npm",
+      "args": ["ci"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX1"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Clean Install - EX2",
+      "type": "shell",
+      "command": "npm",
+      "args": ["ci"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX2"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Clean Install - EX3",
+      "type": "shell",
+      "command": "npm",
+      "args": ["ci"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX3"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Lint EX1",
+      "type": "shell",
+      "command": "npx",
+      "args": ["eslint", "."],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX1"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Lint EX2",
+      "type": "shell",
+      "command": "npx",
+      "args": ["eslint", "."],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX2"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Lint EX3",
+      "type": "shell",
+      "command": "npx",
+      "args": ["eslint", "."],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX3"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "Development Mode - EX1",
+      "type": "shell",
+      "command": "npx",
+      "args": ["nodemon", "app.js"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX1"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*\\[nodemon\\] starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      }
+    },
+    {
+      "label": "Development Mode - EX2",
+      "type": "shell",
+      "command": "npx",
+      "args": ["nodemon", "app.js"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX2"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*\\[nodemon\\] starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      }
+    },
+    {
+      "label": "Development Mode - EX3",
+      "type": "shell",
+      "command": "npx",
+      "args": ["nodemon", "app.js"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX3"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*\\[nodemon\\] starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      }
+    }
+  ]
+}

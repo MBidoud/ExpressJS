@@ -1,0 +1,13 @@
+[2025-06-01 19:36:15] ERROR ::1 GET /error - Erreur de test pour démontrer le logging d'erreur
+Stack: Error: Erreur de test pour démontrer le logging d'erreur
+    at C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\app.js:105:9
+    at Layer.handle [as handle_request] (C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\middleware\logger.js:149:5
+    at Layer.handle [as handle_request] (C:\Users\Pc\TP\NodeJS\express-js-middlewares\EX1\node_modules\express\lib\router\layer.js:95:5)
+

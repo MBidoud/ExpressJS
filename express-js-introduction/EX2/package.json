@@ -1,0 +1,29 @@
+{
+  "name": "express-js-complete-project",
+  "version": "1.0.0",
+  "description": "Projet ExpressJS complet avec structure recommandée",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "express",
+    "nodejs",
+    "web-server",
+    "mvc"
+  ],
+  "author": "",
+  "license": "ISC"
+}

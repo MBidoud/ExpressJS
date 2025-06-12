@@ -1,0 +1,200 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install All Dependencies",
+      "type": "shell",
+      "command": "cd EX1 && npm install && cd ../EX2 && npm install && cd ../EX3 && npm install",
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/express-js-middlewares"
+      }
+    },
+    {
+      "label": "EX1: Start Custom Logging Server",
+      "type": "shell",
+      "command": "npm run dev",
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^Server running on (.*)$",
+          "file": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/express-js-middlewares/EX1"
+      }
+    },
+    {
+      "label": "EX2: Start Authentication Server",
+      "type": "shell",
+      "command": "npm run dev",
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^Server running on (.*)$",
+          "file": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/express-js-middlewares/EX2"
+      }
+    },
+    {
+      "label": "EX3: Start Third-party Middlewares Server",
+      "type": "shell",
+      "command": "npm run dev",
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^Server running on (.*)$",
+          "file": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*starting.*$",
+          "endsPattern": "^.*Server running on.*$"
+        }
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/express-js-middlewares/EX3"
+      }
+    },
+    {
+      "label": "Start All Servers",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "EX1: Start Custom Logging Server",
+        "EX2: Start Authentication Server",
+        "EX3: Start Third-party Middlewares Server"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "EX1: Test Custom Logging",
+      "type": "shell",
+      "command": "npm test",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/express-js-middlewares/EX1"
+      }
+    },
+    {
+      "label": "EX2: Test Authentication",
+      "type": "shell",
+      "command": "npm test",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/express-js-middlewares/EX2"
+      }
+    },
+    {
+      "label": "EX3: Test Third-party Middlewares",
+      "type": "shell",
+      "command": "npm test",
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/express-js-middlewares/EX3"
+      }
+    },
+    {
+      "label": "Test All Exercises",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "EX1: Test Custom Logging",
+        "EX2: Test Authentication",
+        "EX3: Test Third-party Middlewares"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-lg-8 mx-auto">
+    <h1 class="mb-4">📋 <%= title %></h1>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Projet ExpressJS Complet</h5>
+        <p class="card-text"><%= description %></p>
+
+        <h6 class="mt-4">🛠️ Fonctionnalités incluses:</h6>
+        <ul class="list-group list-group-flush">
+          <% features.forEach(feature => { %>
+          <li class="list-group-item d-flex align-items-center">
+            <span class="badge bg-success rounded-pill me-2">✓</span>
+            <%= feature %>
+          </li>
+          <% }); %>
+        </ul>
+
+        <div class="mt-4">
+          <h6>🏗️ Structure du projet:</h6>
+          <pre class="bg-light p-3 rounded"><code>EX2/
+├── app.js                 # Application principale
+├── package.json           # Configuration npm
+├── .env                   # Variables d'environnement
+├── routes/               # Définition des routes
+│   ├── index.js
+│   ├── users.js
+│   └── api.js
+├── controllers/          # Logique métier
+│   ├── indexController.js
+│   └── userController.js
+├── middleware/           # Middlewares personnalisés
+│   ├── errorHandler.js
+│   └── logger.js
+├── views/               # Templates EJS
+│   ├── index.ejs
+│   ├── about.ejs
+│   └── users/
+├── public/              # Fichiers statiques
+│   ├── css/
+│   ├── js/
+│   └── images/
+└── config/              # Configuration</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

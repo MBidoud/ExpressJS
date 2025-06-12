@@ -1,0 +1,87 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug EX1 - Custom Logging",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/express-js-middlewares/EX1/app.js",
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "restart": true,
+      "runtimeExecutable": "nodemon",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug EX2 - Authentication",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/express-js-middlewares/EX2/app.js",
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "restart": true,
+      "runtimeExecutable": "nodemon",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Debug EX3 - Third-party Middlewares",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/express-js-middlewares/EX3/app.js",
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "restart": true,
+      "runtimeExecutable": "nodemon",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Run EX1 Tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/express-js-middlewares/EX1/test-logging.js",
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "test"
+      },
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Run EX2 Tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/express-js-middlewares/EX2/test-auth.js",
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "test"
+      },
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "name": "Run EX3 Tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/express-js-middlewares/EX3/test-middlewares.js",
+      "console": "integratedTerminal",
+      "env": {
+        "NODE_ENV": "test"
+      },
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug All Servers",
+      "configurations": [
+        "Debug EX1 - Custom Logging",
+        "Debug EX2 - Authentication",
+        "Debug EX3 - Third-party Middlewares"
+      ]
+    }
+  ]
+}

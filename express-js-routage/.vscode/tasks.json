@@ -1,0 +1,138 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start EX1 - Task Management API",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX1"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start EX2 - Blog API",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX2"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start EX3 - E-commerce API",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "group": "build",
+      "options": {
+        "cwd": "${workspaceFolder}/EX3"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Test EX1 API",
+      "type": "shell",
+      "command": "node",
+      "args": ["test-api.js"],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX1"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Test EX2 API",
+      "type": "shell",
+      "command": "node",
+      "args": ["test-routes.js"],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX2"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Test EX3 API",
+      "type": "shell",
+      "command": "node",
+      "args": ["test-api.js"],
+      "group": "test",
+      "options": {
+        "cwd": "${workspaceFolder}/EX3"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Dependencies - All Projects",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "cd EX1 && npm install && cd ../EX2 && npm install && cd ../EX3 && npm install"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    }
+  ]
+}

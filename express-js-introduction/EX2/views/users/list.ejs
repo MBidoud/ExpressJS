@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-lg-10 mx-auto">
+    <h1 class="mb-4">👥 <%= title %></h1>
+
+    <div class="card">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h5 class="mb-0">Liste des utilisateurs</h5>
+        <span class="badge bg-primary"><%= users.length %> utilisateur(s)</span>
+      </div>
+      <div class="card-body">
+        <% if (users.length === 0) { %>
+        <div class="text-center py-4">
+          <p class="text-muted">Aucun utilisateur trouvé.</p>
+        </div>
+        <% } else { %>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Âge</th>
+                <th>Ville</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(user => { %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.age %> ans</td>
+                <td><%= user.city %></td>
+                <td>
+                  <a
+                    href="/users/<%= user.id %>"
+                    class="btn btn-sm btn-primary"
+                  >
+                    👁️ Voir
+                  </a>
+                  <a
+                    href="/api/users/<%= user.id %>"
+                    class="btn btn-sm btn-success"
+                    target="_blank"
+                  >
+                    🔌 API
+                  </a>
+                </td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">🔗 API Endpoints</h6>
+            <ul class="list-unstyled">
+              <li><code>GET /api/users</code> - Liste tous les utilisateurs</li>
+              <li>
+                <code>GET /api/users/:id</code> - Détails d'un utilisateur
+              </li>
+              <li><code>POST /api/users</code> - Créer un utilisateur</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">📊 Statistiques</h6>
+            <p><strong>Total:</strong> <%= users.length %> utilisateurs</p>
+            <p>
+              <strong>Âge moyen:</strong>
+              <%= Math.round(users.reduce((sum, user) => sum + user.age, 0) /
+              users.length) %> ans
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

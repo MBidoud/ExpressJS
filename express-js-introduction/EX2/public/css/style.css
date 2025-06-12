@@ -1,0 +1,131 @@
+/* Styles personnalisés pour Express Complete Project */
+
+body {
+  background-color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navigation */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Cards */
+.card {
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Jumbotron */
+.jumbotron {
+  background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
+}
+
+/* Tables */
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Buttons */
+.btn {
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+}
+
+/* Forms */
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Code blocks */
+pre {
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+}
+
+code {
+  color: #e83e8c;
+  background-color: #f8f9fa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+}
+
+/* Badges */
+.badge {
+  font-size: 0.75rem;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2rem;
+  }
+
+  .jumbotron {
+    padding: 2rem 1rem;
+  }
+
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+}
+
+/* Status indicators */
+.status-active {
+  color: #28a745;
+}
+
+.status-inactive {
+  color: #dc3545;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

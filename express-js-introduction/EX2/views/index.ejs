@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-lg-8 mx-auto">
+    <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
+      <h1 class="display-4">🚀 <%= title %></h1>
+      <p class="lead"><%= message %></p>
+      <hr class="my-4" />
+      <p>Heure actuelle: <strong><%= currentTime %></strong></p>
+      <a class="btn btn-light btn-lg" href="/about" role="button"
+        >En savoir plus</a
+      >
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5 class="card-title">👥 Utilisateurs</h5>
+            <p class="card-text">Gestion des utilisateurs avec CRUD complet</p>
+            <a href="/users" class="btn btn-primary">Voir les utilisateurs</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5 class="card-title">🔌 API REST</h5>
+            <p class="card-text">API RESTful pour intégrations externes</p>
+            <a href="/api/status" class="btn btn-success">Tester l'API</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5 class="card-title">📧 Contact</h5>
+            <p class="card-text">Formulaire de contact fonctionnel</p>
+            <a href="/contact" class="btn btn-info">Nous contacter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

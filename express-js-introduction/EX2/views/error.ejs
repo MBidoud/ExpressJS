@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-lg-8 mx-auto text-center">
+    <div class="py-5">
+      <h1 class="display-1 text-danger"><%= error.status %></h1>
+      <h2 class="mb-4"><%= title %></h2>
+      <p class="lead mb-4"><%= message %></p>
+
+      <div class="mb-4">
+        <a href="/" class="btn btn-primary me-2">🏠 Accueil</a>
+        <a href="javascript:history.back()" class="btn btn-secondary"
+          >← Retour</a
+        >
+      </div>
+
+      <% if (error && error.stack && process.env.NODE_ENV === 'development') {
+      %>
+      <div class="card mt-4">
+        <div class="card-header bg-danger text-white">
+          <h5 class="mb-0">Détails de l'erreur (mode développement)</h5>
+        </div>
+        <div class="card-body text-start">
+          <pre class="text-danger"><%= error.stack %></pre>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>

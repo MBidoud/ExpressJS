@@ -1,0 +1,29 @@
+{
+  "name": "ex2-auth-middleware",
+  "version": "1.0.0",
+  "description": "Simple authentication middleware for Express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "node test-auth.js"
+  },
+  "keywords": [
+    "express",
+    "middleware",
+    "authentication",
+    "jwt",
+    "token"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

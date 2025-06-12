@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .nav-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d3436;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 1em;
+        }
+
+        .sort-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sort-select {
+            padding: 8px 15px;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .image-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-card:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-card:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .overlay-btn {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .overlay-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .delete-btn {
+            background: rgba(231, 76, 60, 0.8) !important;
+        }
+
+        .delete-btn:hover {
+            background: rgba(231, 76, 60, 1) !important;
+        }
+
+        .image-info {
+            padding: 20px;
+        }
+
+        .image-title {
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .image-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .image-size {
+            color: #74b9ff;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .image-date {
+            color: #636e72;
+            font-size: 0.9em;
+        }
+
+        .image-description {
+            color: #636e72;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .image-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tag {
+            background: rgba(116, 185, 255, 0.2);
+            color: #0984e3;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .empty-gallery {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            color: #636e72;
+        }
+
+        .empty-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .stats-bar {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0984e3;
+        }
+
+        .stat-label {
+            color: #636e72;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .sort-controls {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-links">
+            <a href="/" class="nav-link">📤 Upload</a>
+            <a href="/gallery" class="nav-link">🖼️ Galerie</a>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>🖼️ Galerie d'Images</h1>
+            <p>Parcourez et gérez votre collection d'images</p>
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="search-box">
+                <form method="GET" action="/gallery">
+                    <input type="text" 
+                           name="search" 
+                           class="search-input" 
+                           placeholder="🔍 Rechercher par nom, description ou tags..." 
+                           value="{search}">
+                    <input type="hidden" name="sort" value="{sortBy}">
+                    <input type="hidden" name="order" value="{order}">
+                </form>
+            </div>
+            
+            <div class="sort-controls">
+                <select class="sort-select" onchange="updateSort(this.value)">
+                    <option value="date" {sortBy === 'date' ? 'selected' : ''}>📅 Date</option>
+                    <option value="name" {sortBy === 'name' ? 'selected' : ''}>📝 Nom</option>
+                    <option value="size" {sortBy === 'size' ? 'selected' : ''}>📏 Taille</option>
+                </select>
+                
+                <select class="sort-select" onchange="updateOrder(this.value)">
+                    <option value="desc" {order === 'desc' ? 'selected' : ''}>⬇️ Décroissant</option>
+                    <option value="asc" {order === 'asc' ? 'selected' : ''}>⬆️ Croissant</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Galerie -->
+        {totalImages > 0 ? `
+        <div class="gallery-grid">
+            {images.map(image => `
+            <div class="image-card">
+                <div class="image-container">
+                    <img src="/uploads/thumbnails/thumb_${image.filename}" 
+                         alt="${image.originalName}" 
+                         class="gallery-image">
+                    <div class="image-overlay">
+                        <a href="/image/${image.id}" class="overlay-btn">👁️ Voir</a>
+                        <button onclick="deleteImage(${image.id})" class="overlay-btn delete-btn">🗑️ Supprimer</button>
+                    </div>
+                </div>
+                <div class="image-info">
+                    <div class="image-title">${image.originalName}</div>
+                    <div class="image-meta">
+                        <span class="image-size">${(image.size / 1024 / 1024).toFixed(2)} MB</span>
+                        <span class="image-date">${new Date(image.uploadDate).toLocaleDateString('fr-FR')}</span>
+                    </div>
+                    ${image.description ? `<div class="image-description">${image.description}</div>` : ''}
+                    <div class="image-tags">
+                        ${image.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            </div>
+            `).join('')}
+        </div>
+        ` : `
+        <div class="empty-gallery">
+            <div class="empty-icon">📷</div>
+            <h2>Aucune image trouvée</h2>
+            <p>Commencez par uploader vos premières images !</p>
+            <br>
+            <a href="/" class="nav-link">📤 Uploader des images</a>
+        </div>
+        `}
+
+        <!-- Statistiques -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">{totalImages}</div>
+                <div class="stat-label">Images</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{(totalSize / 1024 / 1024).toFixed(1)}</div>
+                <div class="stat-label">MB utilisés</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{search ? 'Filtrées' : 'Toutes'}</div>
+                <div class="stat-label">Affichage</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateSort(value) {
+            const url = new URL(window.location);
+            url.searchParams.set('sort', value);
+            window.location = url;
+        }
+
+        function updateOrder(value) {
+            const url = new URL(window.location);
+            url.searchParams.set('order', value);
+            window.location = url;
+        }
+
+        async function deleteImage(imageId) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cette image ?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/image/${imageId}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Image supprimée avec succès');
+                    location.reload();
+                } else {
+                    alert('Erreur lors de la suppression: ' + result.message);
+                }
+            } catch (error) {
+                alert('Erreur lors de la suppression: ' + error.message);
+            }
+        }
+
+        // Auto-submit search on input
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            clearTimeout(this.searchTimeout);
+            this.searchTimeout = setTimeout(() => {
+                this.form.submit();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

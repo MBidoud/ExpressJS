@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .nav-links {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .nav-link {
+        display: inline-block;
+        padding: 12px 25px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #2d3436;
+        text-decoration: none;
+        border-radius: 25px;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+        font-weight: bold;
+      }
+
+      .nav-link:hover {
+        background: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .detail-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .image-header {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+      }
+
+      .main-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #000;
+      }
+
+      .image-overlay {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .overlay-btn {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #2d3436;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: bold;
+        backdrop-filter: blur(5px);
+      }
+
+      .overlay-btn:hover {
+        background: white;
+        transform: scale(1.05);
+      }
+
+      .delete-btn {
+        background: rgba(231, 76, 60, 0.9) !important;
+        color: white !important;
+      }
+
+      .delete-btn:hover {
+        background: rgba(231, 76, 60, 1) !important;
+      }
+
+      .image-info {
+        padding: 40px;
+      }
+
+      .image-title {
+        font-size: 2em;
+        color: #2d3436;
+        margin-bottom: 20px;
+        word-break: break-word;
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .meta-item {
+        background: rgba(116, 185, 255, 0.1);
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid rgba(116, 185, 255, 0.3);
+      }
+
+      .meta-label {
+        font-weight: bold;
+        color: #0984e3;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .meta-value {
+        color: #2d3436;
+        font-size: 1.1em;
+      }
+
+      .description-section {
+        background: rgba(255, 255, 255, 0.5);
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+      }
+
+      .description-text {
+        color: #636e72;
+        font-size: 1.1em;
+        line-height: 1.6;
+        font-style: italic;
+      }
+
+      .tags-section {
+        margin-bottom: 30px;
+      }
+
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .tag {
+        background: linear-gradient(45deg, #74b9ff, #0984e3);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        font-weight: bold;
+        transition: transform 0.3s ease;
+      }
+
+      .tag:hover {
+        transform: scale(1.05);
+      }
+
+      .actions-section {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1em;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #74b9ff, #0984e3);
+        color: white;
+      }
+
+      .btn-secondary {
+        background: linear-gradient(45deg, #636e72, #2d3436);
+        color: white;
+      }
+
+      .btn-danger {
+        background: linear-gradient(45deg, #e74c3c, #c0392b);
+        color: white;
+      }
+
+      .btn-success {
+        background: linear-gradient(45deg, #00b894, #00a085);
+        color: white;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .fullscreen-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .fullscreen-image {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+      }
+
+      .fullscreen-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 50%;
+        font-size: 1.5em;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .fullscreen-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .image-header {
+          height: 250px;
+        }
+
+        .image-info {
+          padding: 25px;
+        }
+
+        .meta-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .actions-section {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .image-overlay {
+          top: 10px;
+          right: 10px;
+        }
+
+        .overlay-btn {
+          padding: 8px 12px;
+          font-size: 0.9em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Navigation -->
+      <div class="nav-links">
+        <a href="/" class="nav-link">📤 Upload</a>
+        <a href="/gallery" class="nav-link">🖼️ Galerie</a>
+      </div>
+
+      <!-- Carte détail de l'image -->
+      <div class="detail-card">
+        <div class="image-header">
+          <img
+            src="/uploads/{image.filename}"
+            alt="{image.originalName}"
+            class="main-image"
+            onclick="openFullscreen(this.src)"
+          />
+
+          <div class="image-overlay">
+            <button onclick="downloadImage()" class="overlay-btn">
+              💾 Télécharger
+            </button>
+            <button
+              onclick="openFullscreen('/uploads/{image.filename}')"
+              class="overlay-btn"
+            >
+              🔍 Plein écran
+            </button>
+            <button
+              onclick="deleteImage({image.id})"
+              class="overlay-btn delete-btn"
+            >
+              🗑️ Supprimer
+            </button>
+          </div>
+        </div>
+
+        <div class="image-info">
+          <h1 class="image-title">{image.originalName}</h1>
+
+          <div class="meta-grid">
+            <div class="meta-item">
+              <div class="meta-label">📏 Taille du fichier</div>
+              <div class="meta-value">{formattedSize} MB</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">📅 Date d'upload</div>
+              <div class="meta-value">{formattedDate}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">🎨 Type de fichier</div>
+              <div class="meta-value">{image.mimetype}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">🆔 ID unique</div>
+              <div class="meta-value">{image.id}</div>
+            </div>
+          </div>
+
+          {image.description ? `
+          <div class="description-section">
+            <div class="meta-label">📝 Description</div>
+            <div class="description-text">{image.description}</div>
+          </div>
+          ` : ''} {image.tags && image.tags.length > 0 ? `
+          <div class="tags-section">
+            <div class="meta-label">🏷️ Tags</div>
+            <div class="tags-container">
+              ${image.tags.map(tag => `<span class="tag">${tag}</span
+              >`).join('')}
+            </div>
+          </div>
+          ` : ''}
+
+          <div class="actions-section">
+            <a href="/gallery" class="btn btn-primary">
+              ← Retour à la galerie
+            </a>
+            <button onclick="shareImage()" class="btn btn-secondary">
+              🔗 Partager
+            </button>
+            <button onclick="downloadImage()" class="btn btn-success">
+              💾 Télécharger
+            </button>
+            <button onclick="deleteImage({image.id})" class="btn btn-danger">
+              🗑️ Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal plein écran -->
+    <div id="fullscreenModal" class="fullscreen-modal">
+      <button class="fullscreen-close" onclick="closeFullscreen()">×</button>
+      <img id="fullscreenImage" class="fullscreen-image" src="" alt="" />
+    </div>
+
+    <script>
+      function openFullscreen(imageSrc) {
+        document.getElementById("fullscreenImage").src = imageSrc;
+        document.getElementById("fullscreenModal").style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeFullscreen() {
+        document.getElementById("fullscreenModal").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      function downloadImage() {
+        const link = document.createElement("a");
+        link.href = "/uploads/{image.filename}";
+        link.download = "{image.originalName}";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      async function deleteImage(imageId) {
+        if (!confirm("Êtes-vous sûr de vouloir supprimer cette image ?")) {
+          return;
+        }
+
+        try {
+          const response = await fetch(`/image/${imageId}`, {
+            method: "DELETE",
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            alert("Image supprimée avec succès");
+            window.location.href = "/gallery";
+          } else {
+            alert("Erreur lors de la suppression: " + result.message);
+          }
+        } catch (error) {
+          alert("Erreur lors de la suppression: " + error.message);
+        }
+      }
+
+      function shareImage() {
+        const url = window.location.href;
+
+        if (navigator.share) {
+          navigator
+            .share({
+              title: "{image.originalName}",
+              text: "Regardez cette image !",
+              url: url,
+            })
+            .catch(console.error);
+        } else {
+          // Fallback - copier l'URL
+          navigator.clipboard
+            .writeText(url)
+            .then(() => {
+              alert("URL copiée dans le presse-papiers !");
+            })
+            .catch(() => {
+              prompt("Copiez cette URL:", url);
+            });
+        }
+      }
+
+      // Fermer le modal avec Escape
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeFullscreen();
+        }
+      });
+
+      // Fermer le modal en cliquant à l'extérieur
+      document
+        .getElementById("fullscreenModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeFullscreen();
+          }
+        });
+
+      // Animation d'entrée
+      document.addEventListener("DOMContentLoaded", function () {
+        const card = document.querySelector(".detail-card");
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+
+        setTimeout(() => {
+          card.style.transition = "all 0.6s ease";
+          card.style.opacity = "1";
+          card.style.transform = "translateY(0)";
+        }, 100);
+      });
+    </script>
+  </body>
+</html>

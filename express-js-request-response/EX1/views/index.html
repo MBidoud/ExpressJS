@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: 300;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      .required::after {
+        content: " *";
+        color: #e74c3c;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="number"] {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: #fafafa;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus,
+      input[type="number"]:focus {
+        outline: none;
+        border-color: #667eea;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      input[type="checkbox"] {
+        margin-right: 10px;
+        transform: scale(1.2);
+        accent-color: #667eea;
+      }
+
+      .checkbox-label {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
+      }
+
+      .error-container {
+        background: #ffeaea;
+        border: 1px solid #e74c3c;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        color: #c0392b;
+      }
+
+      .error-item {
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+
+      .error-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .success-container {
+        background: #eafaf1;
+        border: 1px solid #27ae60;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        color: #27ae60;
+      }
+
+      .password-requirements {
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+        line-height: 1.4;
+      }
+
+      .links {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .links a {
+        color: #667eea;
+        text-decoration: none;
+        margin: 0 10px;
+        font-size: 14px;
+      }
+
+      .links a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 30px 20px;
+          margin: 10px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .spinner {
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid #667eea;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{title}}</h1>
+
+      {{errors}} {{success}}
+
+      <form id="registrationForm" method="POST" action="/register">
+        <div class="form-group">
+          <label for="name" class="required">Nom complet</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Entrez votre nom complet"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="required">Adresse email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="votre@email.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="required">Mot de passe</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="Créez un mot de passe sécurisé"
+          />
+          <div class="password-requirements">
+            Le mot de passe doit contenir au moins 8 caractères avec : une
+            majuscule, une minuscule, un chiffre et un caractère spécial
+            (@$!%*?&)
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="required"
+            >Confirmer le mot de passe</label
+          >
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required
+            placeholder="Confirmez votre mot de passe"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="age">Âge (optionnel)</label>
+          <input
+            type="number"
+            id="age"
+            name="age"
+            min="13"
+            max="120"
+            placeholder="Votre âge"
+          />
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="terms" name="terms" required />
+          <label for="terms" class="checkbox-label">
+            J'accepte les
+            <a href="#" style="color: #667eea">conditions d'utilisation</a> et
+            la
+            <a href="#" style="color: #667eea">politique de confidentialité</a>
+            *
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          S'inscrire
+        </button>
+
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+          Inscription en cours...
+        </div>
+      </form>
+
+      <div class="links">
+        <a href="/info">Informations</a>
+        <a href="/test-form">Formulaire de test</a>
+        <a href="/api/users">Voir les utilisateurs</a>
+      </div>
+    </div>
+
+    <script>
+      // Récupérer les données du formulaire si elles existent
+      const formDataString = "{{formData}}";
+      let formData = {};
+
+      try {
+        if (formDataString && formDataString !== "{}") {
+          formData = JSON.parse(formDataString);
+
+          // Remplir le formulaire avec les données précédentes
+          for (const [key, value] of Object.entries(formData)) {
+            const element = document.getElementById(key);
+            if (element) {
+              if (element.type === "checkbox") {
+                element.checked = value === "on";
+              } else {
+                element.value = value;
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.log("Aucune donnée de formulaire à restaurer");
+      }
+
+      // Gestion de la soumission du formulaire
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (e) {
+          const submitBtn = document.getElementById("submitBtn");
+          const loading = document.getElementById("loading");
+
+          // Afficher le loading
+          submitBtn.style.display = "none";
+          loading.style.display = "block";
+
+          // Validation côté client
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+          if (password !== confirmPassword) {
+            e.preventDefault();
+            alert("Les mots de passe ne correspondent pas");
+            submitBtn.style.display = "block";
+            loading.style.display = "none";
+            return;
+          }
+
+          // Le formulaire sera soumis normalement
+        });
+
+      // Validation en temps réel du mot de passe
+      document
+        .getElementById("password")
+        .addEventListener("input", function (e) {
+          const password = e.target.value;
+          const requirements = document.querySelector(".password-requirements");
+
+          const hasMinLength = password.length >= 8;
+          const hasUpperCase = /[A-Z]/.test(password);
+          const hasLowerCase = /[a-z]/.test(password);
+          const hasNumber = /\d/.test(password);
+          const hasSpecialChar = /[@$!%*?&]/.test(password);
+
+          const isValid =
+            hasMinLength &&
+            hasUpperCase &&
+            hasLowerCase &&
+            hasNumber &&
+            hasSpecialChar;
+
+          if (password.length > 0) {
+            requirements.style.color = isValid ? "#27ae60" : "#e74c3c";
+          } else {
+            requirements.style.color = "#666";
+          }
+        });
+
+      // Vérification de la confirmation du mot de passe
+      document
+        .getElementById("confirmPassword")
+        .addEventListener("input", function (e) {
+          const password = document.getElementById("password").value;
+          const confirmPassword = e.target.value;
+
+          if (confirmPassword.length > 0) {
+            if (password === confirmPassword) {
+              e.target.style.borderColor = "#27ae60";
+            } else {
+              e.target.style.borderColor = "#e74c3c";
+            }
+          } else {
+            e.target.style.borderColor = "#e0e0e0";
+          }
+        });
+    </script>
+  </body>
+</html>
